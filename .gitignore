@@ -1,7 +1,4 @@
 node_modules
 typings
-*.js
-!index.js
-*/**/index.js
 npm-debug.log
 .DS_Store
