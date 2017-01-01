@@ -19,6 +19,7 @@ import fs = require('fs');
 import Helper from './helper';
 
 var expect  = require('chai').expect;
+var pipe = require('multipipe');
 var svg2png = require('../');
 
 describe('The "gulp-svg2png" plugin', () => {
@@ -54,6 +55,16 @@ describe('The "gulp-svg2png" plugin', () => {
                 done();
             });
         });
+
+        stream.write(image);
+        stream.end();
+    });
+
+    it('should finish when executed through multipipe', function (done) {
+        const stream = pipe(svg2png());
+        const image = Helper.createTestFile();
+
+        stream.on('finish', () => done());
 
         stream.write(image);
         stream.end();
